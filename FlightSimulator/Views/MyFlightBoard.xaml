@@ -19,8 +19,8 @@
         <Button  Name="ConnectButton" Content="Connect" Height="40" Width="120"  Margin="5" HorizontalAlignment="Right" 
                  FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0"/>
 
-        <Button  Name="SettingsButton" Content="Settings" Height="40" Width="120"  Margin="5" HorizontalAlignment="Left" 
-                 FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="1"/>
+        <Button  Name="SettingsButton" Content="Settings" Command="{Binding Path=SettingsCommand}" Height="40" Width="120"  Margin="5" HorizontalAlignment="Left" 
+                 FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Click="SettingsButton_Click"/>
 
         <local:FlightBoard Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1"></local:FlightBoard>
     </Grid>

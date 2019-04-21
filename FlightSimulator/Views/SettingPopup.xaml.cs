@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlightSimulator.Model;
+using FlightSimulator.ViewModels.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,13 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class SettingPopup : Window
     {
+        private SettingsWindowViewModel setVm;
+
         public SettingPopup()
         {
             InitializeComponent();
+            setVm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
+            this.DataContext = setVm;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace FlightSimulator.ViewModels.Windows
         public SettingsWindowViewModel(ISettingsModel model)
         {
             this.model = model;
+            //check
         }
 
         public string FlightServerIP
@@ -48,7 +49,7 @@ namespace FlightSimulator.ViewModels.Windows
                 NotifyPropertyChanged("FlightInfoPort");
             }
         }
-
+    
 
 
         public void SaveSettings()
@@ -74,7 +75,12 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnClick()
         {
             model.SaveSettings();
+           // Application.Current.MainWindow.Close();
+            
+            //MainWindow win = (MainWindow)Application.Current.MainWindow;
+            //win.Show();
         }
+
         #endregion
 
         #region CancelCommand

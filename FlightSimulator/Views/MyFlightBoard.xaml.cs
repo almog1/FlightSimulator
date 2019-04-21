@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,21 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class MyFlightBoard : UserControl
     {
+        private FlightBoardViewModel viewModel;
+
         public MyFlightBoard()
         {
             InitializeComponent();
+            viewModel = new FlightBoardViewModel();
+            this.DataContext = viewModel;
         }
 
         private void button_click(object sendler, EventArgs e)
+        {
+
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
