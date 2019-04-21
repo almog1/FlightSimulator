@@ -80,11 +80,13 @@ namespace FlightSimulator.Views
         }
 
         /// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public bool ResetKnobAfterRelease
-        //{
-        //    get { return Convert.ToBoolean(GetValue(ResetKnobAfterReleaseProperty)); }
-        //    set { SetValue(ResetKnobAfterReleaseProperty, value); }
-        //}
+        /*
+        public bool ResetKnobAfterRelease
+        {
+            get { return Convert.ToBoolean(GetValue(ResetKnobAfterReleaseProperty)); }
+            set { SetValue(ResetKnobAfterReleaseProperty, value); }
+        }
+        */
 
         /// <summary>Delegate holding data for joystick state change</summary>
         /// <param name="sender">The object that fired the event</param>
