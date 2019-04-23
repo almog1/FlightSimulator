@@ -75,16 +75,7 @@ namespace FlightSimulator.ViewModels
 
         private void OKClick()
         {
-            //need to send the changed values
-            //!!!!!!!!!!!!!!!!!!!!!!
-            ///!!!!!!!todo!!!!!!
-            ///!!!!!!!!!!!!!!!!!!
-            ///!!!!!!!!!!!!!!!!!!!
-          //  NotifyPropertyChanged("OKClick");
-
-            Console.WriteLine(TextAutoPilot);
-            //need to send the text to the server
-        
+            Console.WriteLine(TextAutoPilot);       
             //send the text - after split
             autoPilotModel.SetValues(TextAutoPilot);
             IsChanged = false;

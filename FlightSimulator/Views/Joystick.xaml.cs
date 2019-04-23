@@ -47,7 +47,8 @@ namespace FlightSimulator.Views
         public double Aileron
         {
             get { return Convert.ToDouble(GetValue(AileronProperty)); }
-            set { SetValue(AileronProperty, value); }
+            set {
+                SetValue(AileronProperty, value); }
         }
 
         /// <summary>current Elevator (or "power"), from 0 to 100</summary>
