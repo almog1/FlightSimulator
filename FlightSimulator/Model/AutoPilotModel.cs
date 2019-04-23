@@ -1,9 +1,10 @@
-﻿using System;
+﻿using FlightSimulator.Model.TCP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+ 
 namespace FlightSimulator.Model
 {
     class AutoPilotModel
@@ -26,8 +27,9 @@ namespace FlightSimulator.Model
         #endregion
 
         //method to send to the simulator the commands
-        public void SetValues()
+        public void SetValues(string text)
         {
+            CommandsChannel.Instance.SendMessage(text);
             //send to server with /r/n
             //each line in 2 seconds
         }
