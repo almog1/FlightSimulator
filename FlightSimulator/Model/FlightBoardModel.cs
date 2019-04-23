@@ -87,7 +87,6 @@ namespace FlightSimulator.Model
                 String data = null; //the mess will be here
                 NetworkStream stream = client.GetStream(); // Get a stream object for reading and writing
 
-
                 while (!shouldStop)
                 {
                     if (client.ReceiveBufferSize > 0)

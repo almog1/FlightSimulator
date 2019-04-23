@@ -15,7 +15,7 @@ namespace FlightSimulator.Model.TCP
     {
           //  private int portCommand;
             private IClientHandler ch;
-
+        private TcpListener tcpListen;
             private bool _isConnect;
             private TcpClient _client;
 
@@ -79,7 +79,8 @@ namespace FlightSimulator.Model.TCP
 
            // thread.Start(); // here the real connection
             }
-            public void Dissconnect()
+
+        public void Dissconnect()
             {
             //if connected
             if (IsConnect == true)
@@ -131,6 +132,12 @@ namespace FlightSimulator.Model.TCP
                     }
                 }).Start();
             }
+        }
+
+        //get line , add "\r\n" and send it to client
+        public void send(string line)
+        {
+
         }
     }
 }

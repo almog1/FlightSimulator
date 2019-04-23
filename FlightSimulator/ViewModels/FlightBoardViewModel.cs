@@ -62,10 +62,10 @@ namespace FlightSimulator.ViewModels
         private void OnConnect()
         {
             // create connection
+           // CommandsChannel.Instance.ConnectToServer2();
+
             CommandsChannel.Instance.ConnectToServer();
             Console.WriteLine("CONNECTED");
-
-           // model.ReloadSettings();
         }
         #endregion
         #endregion
