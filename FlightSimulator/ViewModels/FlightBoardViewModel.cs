@@ -14,25 +14,17 @@ namespace FlightSimulator.ViewModels
     public class FlightBoardViewModel : BaseNotify
     {
         private FlightBoardModel model;
-
+    
         public double Lon
         {
-            get { return model.Lon; }
-            set
-            {
-                model.Lon = value;
-                NotifyPropertyChanged("Lon");
-            }
+            get { return FlightBoardModel.Instance.Lon; }
+           
         }
 
         public double Lat
         {
-            get { return model.Lat; }
-            set
-            {
-                model.Lat = value;
-                NotifyPropertyChanged("Lat");
-            }
+            get { return FlightBoardModel.Instance.Lat; }
+
         }
 
         //Commands for the settings and connect buttoms
