@@ -20,7 +20,7 @@
           
 
                 <Viewbox Grid.Column="0">
-                    <Button  Name="ConnectButton" Content="Connect" Height="25" Width="100"  Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
+            <Button  Name="ConnectButton" Content="Connect" Command="{Binding Path=ConnectCommand}" Height="25" Width="100"  Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
                                 FontSize="14" Grid.Row="0" Grid.Column="0">
                         <Button.Background>
                             <LinearGradientBrush>
