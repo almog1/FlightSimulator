@@ -76,7 +76,7 @@ namespace FlightSimulator.ViewModels
         private void OnConnect()
         {
             // create connection 
-           CommandsChannel.Instance.ConnectToServer();
+            CommandsChannel.Instance.ConnectToServer();
             InfoChannel.Instance.OpenServer();
 
             Console.WriteLine("CONNECTED");

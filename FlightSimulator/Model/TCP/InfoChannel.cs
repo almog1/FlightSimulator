@@ -67,6 +67,7 @@ namespace FlightSimulator.Model.TCP
             listener = new TcpListener(ep);
             listener.Start();
             IsConnect = true;
+
             ClientHandler handler = new ClientHandler();
 
             Thread threadI = new Thread(() =>
@@ -77,7 +78,8 @@ namespace FlightSimulator.Model.TCP
                     {
                         client = listener.AcceptTcpClient();
                         Console.WriteLine("Got new connection");
-                        handler.HandleClient(client);
+                        // handler.HandleClient(client);
+                        GetMesFromPlane();
                     }
                     catch (SocketException)
                     {
@@ -85,8 +87,8 @@ namespace FlightSimulator.Model.TCP
                     }
                 }
                 Console.WriteLine("Server stopped");
+
             });
-        
             threadI.Start();
         }
 
@@ -105,10 +107,11 @@ namespace FlightSimulator.Model.TCP
                     bytes = new byte[client.ReceiveBufferSize];
                     stream.Read(bytes, 0, client.ReceiveBufferSize);
                     data = Encoding.ASCII.GetString(bytes); //the message incoming
+                    Console.WriteLine("data is" + data);
                     string[] splitMs = data.Split(','); //split the mess drom the server
 
-                    FlightBoardModel.Instance.Lon = double.Parse(splitMs[0]);
-                    FlightBoardModel.Instance.Lat = double.Parse(splitMs[1]);
+                    //FlightBoardModel.Instance.Lon = double.Parse(splitMs[0]);
+                    //FlightBoardModel.Instance.Lat = double.Parse(splitMs[1]);
                 }
                 data = null;
             }
