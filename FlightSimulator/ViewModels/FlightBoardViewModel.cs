@@ -1,5 +1,6 @@
 ﻿using FlightSimulator.Model;
 using FlightSimulator.Model.Interface;
+using FlightSimulator.Model.TCP;
 using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,10 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnect()
         {
+            // create connection
+            CommandsChannel.Instance.ConnectToServer();
+            Console.WriteLine("CONNECTED");
+
            // model.ReloadSettings();
         }
         #endregion

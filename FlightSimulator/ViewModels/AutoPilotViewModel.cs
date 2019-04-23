@@ -21,17 +21,16 @@ namespace FlightSimulator.ViewModels
             set
             {
                 ischange = value;
+                //for the background color change
                 NotifyPropertyChanged("IsChanged");
             }
         }
-
 
         public AutoPilotViewModel()
         {
             this.autoPilotModel = AutoPilotModel.Instance;
             IsChanged = false;
             text = "";
-                //check
         }
 
         public string TextAutoPilot
@@ -59,7 +58,7 @@ namespace FlightSimulator.ViewModels
 
         public void setValues()
         {
-            autoPilotModel.SetValues();
+           // autoPilotModel.SetValues(text);
         }
         
         //Commands for the settings and connect buttoms
@@ -81,7 +80,13 @@ namespace FlightSimulator.ViewModels
             ///!!!!!!!todo!!!!!!
             ///!!!!!!!!!!!!!!!!!!
             ///!!!!!!!!!!!!!!!!!!!
-            autoPilotModel.SetValues();
+          //  NotifyPropertyChanged("OKClick");
+
+            Console.WriteLine(TextAutoPilot);
+            //need to send the text to the server
+        
+            //send the text - after split
+            autoPilotModel.SetValues(TextAutoPilot);
             IsChanged = false;
         }
         #endregion
