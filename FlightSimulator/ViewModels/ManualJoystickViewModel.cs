@@ -16,7 +16,7 @@ namespace FlightSimulator.ViewModels
             manualModel = ManualJoystickModel.Instance;
         }
 
-        public string Aileron
+        public double Aileron
         {
             get { return manualModel.Aileron; }
             set
@@ -26,7 +26,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public string Elevator
+        public double Elevator
         {
             get { return manualModel.Elevator; }
             set
@@ -36,7 +36,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public string Rudder
+        public double Rudder
         {
             get { return manualModel.Rudder; }
             set
@@ -46,7 +46,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public string Throttle
+        public double Throttle
         {
             get { return manualModel.Throttle; }
             set

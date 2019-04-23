@@ -75,8 +75,7 @@ namespace FlightSimulator.ViewModels
 
         private void OKClick()
         {
-            Console.WriteLine(TextAutoPilot);
-            
+            Console.WriteLine(TextAutoPilot);       
             //send the text - after split
             autoPilotModel.SetValues(TextAutoPilot);
             IsChanged = false;

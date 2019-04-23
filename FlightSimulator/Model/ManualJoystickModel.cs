@@ -23,12 +23,12 @@ namespace FlightSimulator.Model
         }
         #endregion
 
-        private string _aileron;
-        private string _elevator;
-        private string _rudder;
-        private string _throttle;
+        private double _aileron;
+        private double _elevator;
+        private double _rudder;
+        private double _throttle;
 
-        public string Aileron
+        public double Aileron
         {
             get { return _aileron; }
             set
@@ -37,7 +37,7 @@ namespace FlightSimulator.Model
             }
         }
 
-        public string Elevator
+        public double Elevator
         {
             get { return _elevator; }
             set
@@ -46,7 +46,7 @@ namespace FlightSimulator.Model
             }
         }
 
-        public string Rudder
+        public double Rudder
         {
             get { return _rudder; }
             set
@@ -55,7 +55,7 @@ namespace FlightSimulator.Model
             }
         }
 
-        public string Throttle
+        public double Throttle
         {
             get { return _throttle; }
             set
