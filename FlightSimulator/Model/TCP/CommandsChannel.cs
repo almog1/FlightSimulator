@@ -13,11 +13,11 @@ namespace FlightSimulator.Model.TCP
     //for sending as client to the simulator
     class CommandsChannel
     {
-          //  private int portCommand;
-            private IClientHandler ch;
+        //  private int portCommand;
+        private IClientHandler ch;
 
-            private bool _isConnect;
-            private TcpClient _client;
+        private bool _isConnect;
+        private TcpClient _client;
 
         #region Singleton
         private static CommandsChannel m_Instance = null;
@@ -35,7 +35,8 @@ namespace FlightSimulator.Model.TCP
 
         public bool IsConnect
         {
-            get {
+            get
+            {
                 return _isConnect;
             }
             set
@@ -50,45 +51,40 @@ namespace FlightSimulator.Model.TCP
             //flight command port
         }
 
-         public void ConnectToServer()
-         {
+        public void ConnectToServer()
+        {
             //take it from the settings
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ApplicationSettingsModel.Instance.FlightServerIP),
                 ApplicationSettingsModel.Instance.FlightCommandPort);
-
-           // Thread thread = new Thread(() =>
-            //{
-              //  while (true)
-               // {
-                    try
-                    {
-                        Client = new TcpClient();
-                        Client.Connect(ep); //connecting as client to the server
-                                             //change to connected
-                        IsConnect = true;
-
-                        // TcpClient client = listener.AcceptTcpClient();
-                    }
-                    catch (SocketException)
-                    {
-                        //break;
-                    }
-                //}
-                Console.WriteLine("connect in command channel");
-           // });
-
-           // thread.Start(); // here the real connection
-            }
-            public void Dissconnect()
+            try
             {
+                Client = new TcpClient();
+                Client.Connect(ep); //connecting as client to the server
+                                    //change to connected
+                IsConnect = true;
+
+                // TcpClient client = listener.AcceptTcpClient();
+            }
+            catch (SocketException)
+            {
+                //break;
+            }
+            //}
+            Console.WriteLine("connect in command channel");
+            // });
+
+            // thread.Start(); // here the real connection
+        }
+        public void Dissconnect()
+        {
             //if connected
             if (IsConnect == true)
             {
                 Client.Close();
                 IsConnect = false;
             }
-                //listener.Stop();
-            }
+            //listener.Stop();
+        }
 
         public TcpClient Client
         {
@@ -108,10 +104,8 @@ namespace FlightSimulator.Model.TCP
                 {
                     byte[] sendBuffer = new byte[1024];
 
-                // int bytesToRead = 0, nextReadCount, rc;
-                NetworkStream stream = Client.GetStream();
-                //  StreamWriter writer = new StreamWriter(stream); //open for writing
-                string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                    NetworkStream stream = Client.GetStream();
+                    string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                     string line, newLine = " \r\n";
 
                     for (int i = 0; i < lines.Length; i++)
@@ -120,13 +114,10 @@ namespace FlightSimulator.Model.TCP
                         {
                             line = lines[i] + newLine;
                             sendBuffer = (Encoding.ASCII).GetBytes(line);
-                        //  byteCount = BitConverter.GetBytes(sendBuffer.Length);
-                        stream.Write(sendBuffer, 0, sendBuffer.Length);
+                            stream.Write(sendBuffer, 0, sendBuffer.Length);
 
-                        //                        writer.Write(line);
-                        // Send the actual data
-                        Console.WriteLine("TCP client: Sending the actual data...");
-                        Task.Delay(2000);
+                            Console.WriteLine("TCP client: Sending the actual data...");
+                            Thread.Sleep(2000);
                         }
                     }
                 }).Start();
@@ -134,4 +125,4 @@ namespace FlightSimulator.Model.TCP
         }
     }
 }
-        
+

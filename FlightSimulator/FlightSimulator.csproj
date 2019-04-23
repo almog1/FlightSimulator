@@ -68,6 +68,7 @@
     <Compile Include="Model\TCP\ClientHandler.cs" />
     <Compile Include="Model\TCP\CommandsChannel.cs" />
     <Compile Include="Model\TCP\IClientHandler.cs" />
+    <Compile Include="Model\TCP\InfoChannel.cs" />
     <Compile Include="ViewModels\AutoPilotViewModel.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />

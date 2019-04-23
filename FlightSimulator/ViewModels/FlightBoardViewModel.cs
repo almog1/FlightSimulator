@@ -15,17 +15,31 @@ namespace FlightSimulator.ViewModels
     public class FlightBoardViewModel : BaseNotify
     {
         private FlightBoardModel model;
+
+        public FlightBoardViewModel()
+        {
+            model = FlightBoardModel.Instance;
+        }
     
         public double Lon
         {
-            get { return FlightBoardModel.Instance.Lon; }
-           
+            get { return model.Lon; }
+            set
+            {
+                model.Lon = value;
+                NotifyPropertyChanged("Lon");
+            }
+
         }
 
         public double Lat
         {
-            get { return FlightBoardModel.Instance.Lat; }
-
+            get { return model.Lat; }
+            set
+            {
+                model.Lat = value;
+                NotifyPropertyChanged("Lat");
+            }
         }
 
         //Commands for the settings and connect buttoms
@@ -61,8 +75,10 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnect()
         {
-            // create connection
-            CommandsChannel.Instance.ConnectToServer();
+            // create connection 
+           CommandsChannel.Instance.ConnectToServer();
+            InfoChannel.Instance.OpenServer();
+
             Console.WriteLine("CONNECTED");
 
            // model.ReloadSettings();

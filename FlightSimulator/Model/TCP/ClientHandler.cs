@@ -14,9 +14,16 @@ namespace FlightSimulator.Model.TCP
         {
             new Task(() =>
             {
-                NetworkStream stream = client.GetStream();
-                StreamWriter writer = new StreamWriter(stream); //open for writing
-                writer.Write("Check");
+                using (NetworkStream stream = client.GetStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string commandLine = reader.ReadLine();
+                    Console.WriteLine("Got command: {0}", commandLine);
+
+                    //update lon and lan
+                    //string result = (commandLine, client);
+                }
+                client.Close();
             }).Start();
         }
     }
