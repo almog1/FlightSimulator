@@ -77,13 +77,8 @@ namespace FlightSimulator.Model.TCP
         }
         public void Dissconnect()
         {
-            //if connected
-            if (IsConnect == true)
-            {
-                Client.Close();
-                IsConnect = false;
-            }
-            //listener.Stop();
+            Client.Close();
+            IsConnect = false;
         }
 
         public TcpClient Client

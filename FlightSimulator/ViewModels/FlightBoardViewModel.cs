@@ -70,19 +70,47 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnect()
         {
+            //sigh to the event that notify when the values of lot and lan changed
             InfoChannel.Instance.ClientParamsChanged += model.updateChanges;
-            // create connection 
-            InfoChannel.Instance.OpenServer();
 
-            while (InfoChannel.Instance.InfoChannelConnected == false)
+            if (CommandsChannel.Instance.IsConnect == false)
             {
-                Thread.Sleep(1000); //wait a second untill we connected to the server
+                // create connection 
+                InfoChannel.Instance.OpenServer();
+                //wait a second untill we connected to the server
+                while (InfoChannel.Instance.InfoChannelConnected == false)
+                {
+                    Thread.Sleep(1000);
+                    CommandsChannel.Instance.ConnectToServer();
+                }
+            }
+            else
+            {
+                CommandsChannel.Instance.Dissconnect();
                 CommandsChannel.Instance.ConnectToServer();
             }
+
 
             Console.WriteLine("CONNECTED");
         }
         #endregion
         #endregion
+
+        private ICommand _disConnectComand;
+        public ICommand DisConnectCommand
+        {
+            get
+            {
+                return _disConnectComand ?? (_disConnectComand = new CommandHandler(() => DisConnectClick()));
+            }
+        }
+
+        //closes the info and the command socket
+        private void DisConnectClick()
+        {
+            InfoChannel.Instance.IsConnect = false;
+            CommandsChannel.Instance.Dissconnect();
+        }
+
     }
 }

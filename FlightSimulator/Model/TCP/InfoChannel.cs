@@ -55,7 +55,7 @@ namespace FlightSimulator.Model.TCP
             IsConnect = false;
         }
 
-        public void DisConnect()
+       /* public void DisConnect()
         {
             if (isConnect == true)
             {
@@ -63,7 +63,7 @@ namespace FlightSimulator.Model.TCP
             }
             IsConnect = true;
 
-        }
+        }*/
 
 
         public static InfoChannel Instance
@@ -128,7 +128,8 @@ namespace FlightSimulator.Model.TCP
             String data = null; //the mess will be here
             NetworkStream stream = client.GetStream(); // Get a stream object for reading and writing
 
-            while (true)
+            //we will stop listening when the button disConnect will be pushed
+            while (isConnect)
             {
                 //we got an input from the user
                 if (client.ReceiveBufferSize > 0)
@@ -139,7 +140,6 @@ namespace FlightSimulator.Model.TCP
                     Console.WriteLine("data is" + data);
                     string[] splitMs = data.Split(','); //split the mess drom the server
 
-                    //  if (double.TryParse(splitMs[0]))
                     double lon;
                     double lat;
                     //check valid
