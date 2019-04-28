@@ -62,18 +62,14 @@ namespace FlightSimulator.Model.TCP
                 Client.Connect(ep); //connecting as client to the server
                                     //change to connected
                 IsConnect = true;
-
-                // TcpClient client = listener.AcceptTcpClient();
             }
             catch (SocketException)
             {
                 //break;
             }
-            //}
+            
             Console.WriteLine("connect in command channel");
-            // });
-
-            // thread.Start(); // here the real connection
+          
         }
         public void Dissconnect()
         {
