@@ -123,6 +123,32 @@ namespace FlightSimulator.Model.TCP
                 }).Start();
             }
         }
+
+        public void SetValAndSendMes(string text)
+        {
+            //check the c
+            if (IsConnect == true)
+            {
+                new Thread(() =>
+                {
+                    byte[] sendBuffer = new byte[1024];
+
+                    NetworkStream stream = Client.GetStream();
+
+                    if (text != "")
+                    {
+
+                        sendBuffer = (Encoding.ASCII).GetBytes(text);
+                        Console.WriteLine("the mess from the menual:" + sendBuffer);
+                        stream.Write(sendBuffer, 0, sendBuffer.Length);
+
+                        Console.WriteLine("TCP client: Sending the actual data...");
+                        Thread.Sleep(2000);
+                    }
+
+                }).Start();
+            }
+        }
     }
 }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -19,27 +20,24 @@ namespace FlightSimulator.ViewModels
         public FlightBoardViewModel()
         {
             model = FlightBoardModel.Instance;
+            model.updateChangedParamsEvent += NotifyChangedParams;
         }
-    
+
+        private void NotifyChangedParams()
+        {
+            NotifyPropertyChanged("Lon");
+            NotifyPropertyChanged("Lat");
+        }
+
         public double Lon
         {
             get { return model.Lon; }
-            set
-            {
-                model.Lon = value;
-                NotifyPropertyChanged("Lon");
-            }
 
         }
 
         public double Lat
         {
             get { return model.Lat; }
-            set
-            {
-                model.Lat = value;
-                NotifyPropertyChanged("Lat");
-            }
         }
 
         //Commands for the settings and connect buttoms
@@ -58,9 +56,6 @@ namespace FlightSimulator.ViewModels
             //need to open new window od the settings
             SettingPopup settingPopup = new SettingPopup();
             settingPopup.ShowDialog();
-          //  MainWindow win = (MainWindow)Application.Current.MainWindow;
-          //  win.Show();
-            //model.SaveSettings();
         }
         #endregion
 
@@ -75,13 +70,17 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnect()
         {
+            InfoChannel.Instance.ClientParamsChanged += model.updateChanges;
             // create connection 
-            CommandsChannel.Instance.ConnectToServer();
             InfoChannel.Instance.OpenServer();
 
-            Console.WriteLine("CONNECTED");
+            while (InfoChannel.Instance.InfoChannelConnected == false)
+            {
+                Thread.Sleep(1000); //wait a second untill we connected to the server
+                CommandsChannel.Instance.ConnectToServer();
+            }
 
-           // model.ReloadSettings();
+            Console.WriteLine("CONNECTED");
         }
         #endregion
         #endregion
