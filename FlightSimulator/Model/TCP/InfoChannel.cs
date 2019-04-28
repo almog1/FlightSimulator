@@ -139,11 +139,16 @@ namespace FlightSimulator.Model.TCP
                     Console.WriteLine("data is" + data);
                     string[] splitMs = data.Split(','); //split the mess drom the server
 
-                    double lon = double.Parse(splitMs[0]);
-                    double lat = double.Parse(splitMs[1]);
+                    //  if (double.TryParse(splitMs[0]))
+                    double lon;
+                    double lat;
+                    //check valid
+                    if (double.TryParse(splitMs[0],out lon) && double.TryParse(splitMs[1], out lat))
+                    {
+                        CallParamsChanged(lon, lat);
+                    }
 
                     //notify that something changed
-                    CallParamsChanged(lon, lat);
                 }
                 data = null;
             }
