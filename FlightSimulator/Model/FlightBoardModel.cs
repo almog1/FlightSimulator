@@ -14,6 +14,8 @@ namespace FlightSimulator.Model
     //this class for the left side - change lon and lat according to what gets from the server (that values we change)
     class FlightBoardModel
     {
+        public delegate void UpdateChangedParams();
+        public event UpdateChangedParams updateChangedParamsEvent;
         private static FlightBoardModel m_Instance = null;
         double lon, lat;
 
@@ -52,5 +54,11 @@ namespace FlightSimulator.Model
             }
         }
 
+        public void updateChanges(double lon, double lat)
+        {
+            this.Lat = lat;
+            this.Lon = lon;
+            updateChangedParamsEvent?.Invoke();
+        }
     }
 }

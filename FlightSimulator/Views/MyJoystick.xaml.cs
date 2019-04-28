@@ -28,6 +28,8 @@ namespace FlightSimulator.Views
             InitializeComponent();
             manualViewModel = new ManualJoystickViewModel();
             this.DataContext = manualViewModel;
+            this.Joystick.Moved += manualViewModel.ChangeAileronAndElevator;
+
         }
     }
 }
