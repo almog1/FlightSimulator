@@ -10,13 +10,19 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model.TCP
 {
+
     // Infochannel for listening to the server and getting the lan and lot positions 
     class InfoChannel
     {
         private static InfoChannel m_Instance = null;
+        //event when lot and lat changed
+        public delegate void ParametesChanged(double lon, double lat);
+        public event ParametesChanged ClientParamsChanged;
+
         TcpClient client;
         TcpListener listener;
         private bool isConnect;
+        private bool infoChannelConnected;
 
         public bool IsConnect
         {
@@ -31,6 +37,19 @@ namespace FlightSimulator.Model.TCP
             }
         }
 
+        public bool InfoChannelConnected
+        {
+            get
+            {
+                return infoChannelConnected;
+            }
+
+            set
+            {
+                infoChannelConnected = value;
+            }
+        }
+
         private InfoChannel()
         {
             IsConnect = false;
@@ -38,11 +57,12 @@ namespace FlightSimulator.Model.TCP
 
         public void DisConnect()
         {
-            if(isConnect == true){
+            if (isConnect == true)
+            {
                 listener.Stop();
             }
             IsConnect = true;
-            
+
         }
 
 
@@ -56,6 +76,13 @@ namespace FlightSimulator.Model.TCP
                 }
                 return m_Instance;
             }
+        }
+
+
+        private void CallParamsChanged(double lon, double lat)
+
+        {
+            ClientParamsChanged?.Invoke(lon, lat);
         }
 
         //connect to server in order to get the new values that changed
@@ -72,11 +99,13 @@ namespace FlightSimulator.Model.TCP
 
             Thread threadI = new Thread(() =>
             {
+
                 while (IsConnect)
                 {
                     try
                     {
                         client = listener.AcceptTcpClient();
+                        infoChannelConnected = true;
                         Console.WriteLine("Got new connection");
                         // handler.HandleClient(client);
                         GetMesFromPlane();
@@ -110,8 +139,11 @@ namespace FlightSimulator.Model.TCP
                     Console.WriteLine("data is" + data);
                     string[] splitMs = data.Split(','); //split the mess drom the server
 
-                    //FlightBoardModel.Instance.Lon = double.Parse(splitMs[0]);
-                    //FlightBoardModel.Instance.Lat = double.Parse(splitMs[1]);
+                    double lon = double.Parse(splitMs[0]);
+                    double lat = double.Parse(splitMs[1]);
+
+                    //notify that something changed
+                    CallParamsChanged(lon, lat);
                 }
                 data = null;
             }
