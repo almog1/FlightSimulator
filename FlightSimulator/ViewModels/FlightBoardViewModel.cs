@@ -77,12 +77,12 @@ namespace FlightSimulator.ViewModels
 
             Task taskI = new Task(() =>
             {
+                //if no connections yes
                 if (CommandsChannel.Instance.IsConnect == false)
                 {
                     // create connection 
                     InfoChannel.Instance.OpenServer();
                     //wait a second untill we connected to the server
-
                     while (InfoChannel.Instance.InfoChannelConnected == false)
                     {
                         Thread.Sleep(1000);
@@ -93,14 +93,22 @@ namespace FlightSimulator.ViewModels
                 else
                 {
                     CommandsChannel.Instance.Dissconnect();
-                    CommandsChannel.Instance.ConnectToServer();
-                    
+                    InfoChannel.Instance.Dissconnect();
+
+                    // create connection again
+                    InfoChannel.Instance.OpenServer();
+                    //wait a second untill we connected to the server
+                    while (InfoChannel.Instance.InfoChannelConnected == false)
+                    {
+                        Thread.Sleep(1000);
+                        CommandsChannel.Instance.ConnectToServer();
+                    }
                 }
                 //Console.WriteLine("CONNECTED");
             });
             taskI.Start();
         }
-        
+
         #endregion
         #endregion
 
@@ -116,7 +124,7 @@ namespace FlightSimulator.ViewModels
         //closes the info and the command socket
         private void DisConnectClick()
         {
-            InfoChannel.Instance.IsConnect = false;
+            InfoChannel.Instance.Dissconnect();
             CommandsChannel.Instance.Dissconnect();
         }
 

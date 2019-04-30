@@ -52,6 +52,7 @@ namespace FlightSimulator.Model.TCP
         private InfoChannel()
         {
             IsConnect = false;
+            infoChannelConnected = false;
         }
 
         public static InfoChannel Instance
@@ -108,6 +109,12 @@ namespace FlightSimulator.Model.TCP
             threadI.Start();
         }
 
+        public void Dissconnect()
+        {
+         
+            IsConnect = false;
+        }
+
         //get the messages from the plane about lan and lot
         public void GetMesFromPlane()
         {
@@ -116,7 +123,7 @@ namespace FlightSimulator.Model.TCP
             NetworkStream stream = client.GetStream(); // Get a stream object for reading and writing
 
             //we will stop listening when the button disConnect will be pushed
-            while (isConnect)
+            while (IsConnect)
             {
                 //we got an input from the user
                 if (client.ReceiveBufferSize > 0)
@@ -142,6 +149,4 @@ namespace FlightSimulator.Model.TCP
             listener.Stop();
         }
     }
-
-
 }
