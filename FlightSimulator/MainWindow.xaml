@@ -13,6 +13,14 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="←rudder→" FontSize="16"  VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" Margin="20" Grid.ColumnSpan="2"/>
+
         <Viewbox Grid.Column="1">
             <TabControl Height="550">
                 <TabItem Header="Menual">

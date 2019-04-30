@@ -13,6 +13,7 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
+    //connect between the view of the Flight board and the simulator
     public class FlightBoardViewModel : BaseNotify
     {
         private FlightBoardModel model;
@@ -23,6 +24,7 @@ namespace FlightSimulator.ViewModels
             model.updateChangedParamsEvent += NotifyChangedParams;
         }
 
+        //notify that the properties change - so the view know
         private void NotifyChangedParams()
         {
             NotifyPropertyChanged("Lon");
@@ -73,26 +75,32 @@ namespace FlightSimulator.ViewModels
             //sigh to the event that notify when the values of lot and lan changed
             InfoChannel.Instance.ClientParamsChanged += model.updateChanges;
 
-            if (CommandsChannel.Instance.IsConnect == false)
+            Task taskI = new Task(() =>
             {
-                // create connection 
-                InfoChannel.Instance.OpenServer();
-                //wait a second untill we connected to the server
-                while (InfoChannel.Instance.InfoChannelConnected == false)
+                if (CommandsChannel.Instance.IsConnect == false)
                 {
-                    Thread.Sleep(1000);
-                    CommandsChannel.Instance.ConnectToServer();
+                    // create connection 
+                    InfoChannel.Instance.OpenServer();
+                    //wait a second untill we connected to the server
+
+                    while (InfoChannel.Instance.InfoChannelConnected == false)
+                    {
+                        Thread.Sleep(1000);
+                        CommandsChannel.Instance.ConnectToServer();
+                    }
                 }
-            }
-            else
-            {
-                CommandsChannel.Instance.Dissconnect();
-                CommandsChannel.Instance.ConnectToServer();
-            }
-
-
-            Console.WriteLine("CONNECTED");
+                //if already connected
+                else
+                {
+                    CommandsChannel.Instance.Dissconnect();
+                    CommandsChannel.Instance.ConnectToServer();
+                    
+                }
+                //Console.WriteLine("CONNECTED");
+            });
+            taskI.Start();
         }
+        
         #endregion
         #endregion
 

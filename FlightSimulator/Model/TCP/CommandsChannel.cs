@@ -48,7 +48,6 @@ namespace FlightSimulator.Model.TCP
         private CommandsChannel()
         {
             IsConnect = false; //not connected yet
-            //flight command port
         }
 
         public void ConnectToServer()
@@ -68,12 +67,15 @@ namespace FlightSimulator.Model.TCP
                 //break;
             }
             
-            Console.WriteLine("connect in command channel");
+          //  Console.WriteLine("connect in command channel");
           
         }
         public void Dissconnect()
         {
-            Client.Close();
+            if (IsConnect == true)
+            {
+                Client.Close();
+            }
             IsConnect = false;
         }
 
@@ -86,6 +88,7 @@ namespace FlightSimulator.Model.TCP
             }
         }
 
+        //send the aactual message to the simulator
         public void SendMessage(string text)
         {
             //check the c
@@ -117,7 +120,7 @@ namespace FlightSimulator.Model.TCP
 
         public void SetValAndSendMes(string text)
         {
-            //check the c
+            //check the connection
             if (IsConnect == true)
             {
                 new Thread(() =>
@@ -128,12 +131,11 @@ namespace FlightSimulator.Model.TCP
 
                     if (text != "")
                     {
-
                         sendBuffer = (Encoding.ASCII).GetBytes(text);
-                        Console.WriteLine("the mess from the menual:" + sendBuffer);
+                       // Console.WriteLine("the mess from the menual:" + sendBuffer);
                         stream.Write(sendBuffer, 0, sendBuffer.Length);
 
-                        Console.WriteLine("TCP client: Sending the actual data...");
+                        //Console.WriteLine("TCP client: Sending the actual data...");
                         Thread.Sleep(2000);
                     }
 

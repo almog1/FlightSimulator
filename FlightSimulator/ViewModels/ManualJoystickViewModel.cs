@@ -12,8 +12,6 @@ namespace FlightSimulator.ViewModels
 {
     class ManualJoystickViewModel : BaseNotify
     {
-        private ManualJoystickModel manualModel;
-
         //paths to send message to the simulator
         private string rudderPath = "set controls/flight/rudder";
         private string throttlePath = "set controls/engines/current-engine/throttle";
@@ -22,7 +20,7 @@ namespace FlightSimulator.ViewModels
 
         public ManualJoystickViewModel()
         {
-            manualModel = ManualJoystickModel.Instance;
+           
         }
 
         public double Aileron

@@ -54,6 +54,7 @@ namespace FlightSimulator.Model
             }
         }
 
+        //update the changes in the lot and lan values
         public void updateChanges(double lon, double lat)
         {
             this.Lat = lat;

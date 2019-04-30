@@ -18,10 +18,7 @@ namespace FlightSimulator.Model.TCP
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string commandLine = reader.ReadLine();
-                    Console.WriteLine("Got command: {0}", commandLine);
-
-                    //update lon and lan
-                    //string result = (commandLine, client);
+                    //Console.WriteLine("Got command: {0}", commandLine);
                 }
                 client.Close();
             }).Start();

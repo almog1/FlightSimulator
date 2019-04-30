@@ -7,10 +7,9 @@ using System.Threading.Tasks;
  
 namespace FlightSimulator.Model
 {
+    //for auto pilot mode
     class AutoPilotModel
     {
-     //   public bool isChanged{get;set;}
-
         #region Singleton
         private static AutoPilotModel m_Instance = null;
         public static AutoPilotModel Instance
@@ -29,9 +28,8 @@ namespace FlightSimulator.Model
         //method to send to the simulator the commands
         public void SetValues(string text)
         {
-            CommandsChannel.Instance.SendMessage(text);
-            //send to server with /r/n
-            //each line in 2 seconds
+            //senf the mess to the simulator
+            CommandsChannel.Instance.SendMessage(text);         
         }
     }
 }

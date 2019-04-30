@@ -64,7 +64,6 @@
     <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
     <Compile Include="Model\FlightBoardModel.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
-    <Compile Include="Model\ManualJoystickModel.cs" />
     <Compile Include="Model\TCP\ClientHandler.cs" />
     <Compile Include="Model\TCP\CommandsChannel.cs" />
     <Compile Include="Model\TCP\IClientHandler.cs" />

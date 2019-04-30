@@ -121,7 +121,6 @@ namespace FlightSimulator.Views
             Knob.MouseLeftButtonDown += Knob_MouseLeftButtonDown;
             Knob.MouseLeftButtonUp += Knob_MouseLeftButtonUp;
             Knob.MouseMove += Knob_MouseMove;
-
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
         }
 
@@ -133,15 +132,11 @@ namespace FlightSimulator.Views
             canvasHeight = Base.ActualHeight - KnobBase.ActualHeight;
             Captured?.Invoke(this);
             Knob.CaptureMouse();
-
             centerKnob.Stop();
         }
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
-        {
-            ///!!!!!!!!!!!!!!!!!
-            /// YOU MUST CHANGE THE FUNCTION!!!!
-            ///!!!!!!!!!!!!!!
+        {           
             if (!Knob.IsMouseCaptured) return;
 
             Point newPos = e.GetPosition(Base);
@@ -153,20 +148,18 @@ namespace FlightSimulator.Views
                 return;
             Elevator = -deltaPos.Y;
             Aileron = deltaPos.X;
-           // Elevator /= 124;
-           // Aileron /= 124;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
 
+
+
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
-
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
             _prevAileron = Aileron;
             _prevElevator = Elevator;
-
         }
 
         private void Knob_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -180,6 +173,5 @@ namespace FlightSimulator.Views
             Aileron = Elevator = _prevAileron = _prevElevator = 0;
             Released?.Invoke(this);
         }
-
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
+    //connect between the auto commands from the pilots to the server
     class AutoPilotViewModel : BaseNotify
     {
         private AutoPilotModel autoPilotModel;
@@ -55,11 +56,6 @@ namespace FlightSimulator.ViewModels
 
             }
         }
-
-        public void setValues()
-        {
-           // autoPilotModel.SetValues(text);
-        }
         
         //Commands for the settings and connect buttoms
         #region Commands
@@ -75,7 +71,7 @@ namespace FlightSimulator.ViewModels
 
         private void OKClick()
         {
-            Console.WriteLine(TextAutoPilot);       
+           // Console.WriteLine(TextAutoPilot);       
             //send the text - after split
             autoPilotModel.SetValues(TextAutoPilot);
             IsChanged = false;
