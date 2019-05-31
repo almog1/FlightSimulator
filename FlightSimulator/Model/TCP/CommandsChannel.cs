@@ -64,6 +64,7 @@ namespace FlightSimulator.Model.TCP
             }
             catch (SocketException)
             {
+                Console.WriteLine("FAILED CONNECT COMMAND");
                 //break;
             }
             

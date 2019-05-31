@@ -92,6 +92,7 @@ namespace FlightSimulator.Model.TCP
                 {
                     try
                     {
+                        //recive values from the simulator - accept when send
                         client = listener.AcceptTcpClient();
                         infoChannelConnected = true;
                         //Console.WriteLine("Got new connection");
@@ -111,8 +112,8 @@ namespace FlightSimulator.Model.TCP
 
         public void Dissconnect()
         {
-
             IsConnect = false;
+            InfoChannelConnected = false;
         }
 
         //get the messages from the plane about lan and lot
@@ -137,7 +138,7 @@ namespace FlightSimulator.Model.TCP
                     double lon;
                     double lat;
                     //check valid
-                    if (double.TryParse(splitMs[0], out lon) && double.TryParse(splitMs[1], out lat))
+                    if (double.TryParse(splitMs[0],out lon) && double.TryParse(splitMs[1], out lat))
                     {
                         CallParamsChanged(lon, lat);
                     }

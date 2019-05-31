@@ -80,14 +80,15 @@ namespace FlightSimulator.ViewModels
                 //if no connections yes
                 if (CommandsChannel.Instance.IsConnect == false)
                 {
+                    InfoChannel.Instance.InfoChannelConnected = false;
                     // create connection 
                     InfoChannel.Instance.OpenServer();
                     //wait a second untill we connected to the server
                     while (InfoChannel.Instance.InfoChannelConnected == false)
                     {
                         Thread.Sleep(1000);
-                        CommandsChannel.Instance.ConnectToServer();
                     }
+                    CommandsChannel.Instance.ConnectToServer();
                 }
                 //if already connected
                 else
@@ -101,8 +102,8 @@ namespace FlightSimulator.ViewModels
                     while (InfoChannel.Instance.InfoChannelConnected == false)
                     {
                         Thread.Sleep(1000);
-                        CommandsChannel.Instance.ConnectToServer();
                     }
+                    CommandsChannel.Instance.ConnectToServer();
                 }
                 //Console.WriteLine("CONNECTED");
             });
