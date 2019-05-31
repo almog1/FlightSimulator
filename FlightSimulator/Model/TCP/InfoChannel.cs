@@ -111,7 +111,7 @@ namespace FlightSimulator.Model.TCP
 
         public void Dissconnect()
         {
-         
+
             IsConnect = false;
         }
 
@@ -131,13 +131,13 @@ namespace FlightSimulator.Model.TCP
                     bytes = new byte[client.ReceiveBufferSize];
                     stream.Read(bytes, 0, client.ReceiveBufferSize);
                     data = Encoding.ASCII.GetString(bytes); //the message incoming
-                   // Console.WriteLine("data is" + data);
+                                                            // Console.WriteLine("data is" + data);
                     string[] splitMs = data.Split(','); //split the mess drom the server
 
                     double lon;
                     double lat;
                     //check valid
-                    if (double.TryParse(splitMs[0],out lon) && double.TryParse(splitMs[1], out lat))
+                    if (double.TryParse(splitMs[0], out lon) && double.TryParse(splitMs[1], out lat))
                     {
                         CallParamsChanged(lon, lat);
                     }
